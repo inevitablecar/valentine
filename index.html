@@ -84,8 +84,18 @@
 
         yesBtn.addEventListener("click", () => {
             message.innerHTML = "Yayyyyy!!! ❤️🥳";
+        
+            fetch("https://docs.google.com/forms/d/e/1FAIpQLSetXX1YbbY8WfxExhBQbXXuHHlOrevjX-03gzvmRONiIkSHtw/viewform?usp=header", {
+                method: "POST",
+                mode: "no-cors",
+                headers: { "Content-Type": "application/x-www-form-urlencoded" },
+                body: "entry.123456=Someone&entry.654321=Yes"
+            });
         });
     </script>
 
 </body>
 </html>
+
+
+
