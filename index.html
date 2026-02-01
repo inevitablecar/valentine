@@ -53,19 +53,15 @@
 <div id="message"></div>
 
 <script>
-    // Ask visitor name
     let userName = prompt("Enter your name 😄") || "Unknown";
 
     const noBtn = document.getElementById("noBtn");
     const yesBtn = document.getElementById("yesBtn");
     const message = document.getElementById("message");
 
-    // 🔗 Google Form endpoint (REPLACE WITH YOURS)
     const formURL = "https://docs.google.com/forms/d/e/1FAIpQLSetXX1YbbY8WfxExhBQbXXuHHlOrevjX-03gzvmRONiIkSHtw/formResponse";
-    
-
-    const nameField = "entry.1031580998";   // Replace
-    const responseField = "entry.876474799"; // Replace
+    const nameField = "entry.1031580998";
+    const responseField = "entry.876474799";
 
     function sendResponse(answer) {
         fetch(formURL, {
@@ -76,18 +72,19 @@
         });
     }
 
+    let noLogged = false; // prevents spam logging
+
     function moveButton() {
         const maxX = window.innerWidth - noBtn.offsetWidth;
         const maxY = window.innerHeight - noBtn.offsetHeight;
 
-        const randomX = Math.floor(Math.random() * maxX);
-        const randomY = Math.floor(Math.random() * maxY);
+        noBtn.style.left = Math.random() * maxX + "px";
+        noBtn.style.top = Math.random() * maxY + "px";
 
-        noBtn.style.left = randomX + "px";
-        noBtn.style.top = randomY + "px";
-
-        // Log attempt to press NO
-        sendResponse("No 😢");
+        if (!noLogged) {
+            sendResponse("No 😢"); // MUST match form option exactly
+            noLogged = true;
+        }
     }
 
     document.addEventListener("mousemove", (e) => {
@@ -97,21 +94,14 @@
             e.clientY - (rect.top + rect.height / 2)
         );
 
-        if (distance < 100) {
-            moveButton();
-        }
+        if (distance < 100) moveButton();
     });
 
     yesBtn.addEventListener("click", () => {
         message.innerHTML = "Yayyyyy!!! ❤️🥳";
-        sendResponse("Yes 😍");
+        sendResponse("Yes 😍"); // MUST match form option exactly
     });
 </script>
 
 </body>
 </html>
-
-
-
-
-
