@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Be My Valentine?</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 100px;
+            background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+            overflow: hidden;
+        }
+
+        h1 {
+            font-size: 40px;
+        }
+
+        .btn {
+            padding: 12px 25px;
+            font-size: 18px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            position: absolute;
+        }
+
+        #yesBtn {
+            background-color: #ff4d6d;
+            color: white;
+            left: 45%;
+            top: 300px;
+        }
+
+        #noBtn {
+            background-color: #444;
+            color: white;
+            left: 55%;
+            top: 300px;
+        }
+
+        #message {
+            margin-top: 50px;
+            font-size: 28px;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Will you be my Valentine? 💖</h1>
+
+    <button id="yesBtn" class="btn">Yes 😍</button>
+    <button id="noBtn" class="btn">No 😢</button>
+
+    <div id="message"></div>
+
+    <script>
+        const noBtn = document.getElementById("noBtn");
+        const yesBtn = document.getElementById("yesBtn");
+        const message = document.getElementById("message");
+
+        function moveButton() {
+            const maxX = window.innerWidth - noBtn.offsetWidth;
+            const maxY = window.innerHeight - noBtn.offsetHeight;
+
+            const randomX = Math.floor(Math.random() * maxX);
+            const randomY = Math.floor(Math.random() * maxY);
+
+            noBtn.style.left = randomX + "px";
+            noBtn.style.top = randomY + "px";
+        }
+
+        document.addEventListener("mousemove", (e) => {
+            const rect = noBtn.getBoundingClientRect();
+            const distance = Math.hypot(
+                e.clientX - (rect.left + rect.width / 2),
+                e.clientY - (rect.top + rect.height / 2)
+            );
+
+            if (distance < 100) {
+                moveButton();
+            }
+        });
+
+        yesBtn.addEventListener("click", () => {
+            message.innerHTML = "Yayyyyy!!! ❤️🥳";
+        });
+    </script>
+
+</body>
+</html>
